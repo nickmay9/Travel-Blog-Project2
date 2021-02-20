@@ -11,7 +11,7 @@ async function newPostHandler(event){
     if(title && post_text && city && country) {
 
         let lat, long;
-        const cityData = await fetch(`http://www.mapquestapi.com/geocoding/v1/address?key=pjtMs45lJi90EGCVfaBEDChiCmQFtGmI&location=${city}+${country}`).then(data => {
+        const cityData = await fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=pjtMs45lJi90EGCVfaBEDChiCmQFtGmI&location=${city}+${country}`).then(data => {
             return data.json();
         }).then(data => {
             [lat, long] = [data.results[0].locations[0].latLng.lat, data.results[0].locations[0].latLng.lng];
