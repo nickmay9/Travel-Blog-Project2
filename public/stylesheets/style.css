@@ -1,16 +1,6 @@
-html, body {
-    height: 100%;
+* {
+    padding: 0;
     margin: 0;
-}
-
-.wrapper {
-    min-height: 100%;
-    margin: 0 auto -50px;
-}
-
-.push {
-    height: 50px;
-    padding: 65px;
 }
 
 /* Navbar container */
@@ -31,21 +21,6 @@ nav {
     border-bottom: 5px solid rgb(114, 114, 114);
 }
   
-footer {
-    color: white;
-    height: 50px;
-    width: 100%;
-    background-color: rgb(77, 77, 77);
-    left: 0;
-    bottom: 0;
-    text-align: center;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-footer p {
-    padding-top: 12px;
-}
-
 #map {
     margin-right: auto;
     margin-left: auto;
@@ -68,4 +43,20 @@ textarea {
 
 section.comment {
  color: white;
+}
+
+main {
+    margin-bottom: 80px;
+}
+
+footer {
+    color: white;
+    background-color: rgb(77, 77, 77);
+    text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 15px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
