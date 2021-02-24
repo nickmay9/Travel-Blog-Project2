@@ -9,8 +9,7 @@ User.hasMany(Post, {
 });
   
 Post.belongsTo(User, {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE'
+    foreignKey: 'user_id'
 });
 
 User.belongsToMany(Post, {
@@ -39,15 +38,16 @@ User.hasMany(Favorite, {
   
 Post.hasMany(Favorite, {
     foreignKey: 'post_id',
-    onDelete: 'CASCADE'
 });
 
 Comment.belongsTo(User, {
-    foreignKey: 'user_id'
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
 });
   
 Comment.belongsTo(Post, {
-    foreignKey: 'post_id'
+    foreignKey: 'post_id',
+    onDelete: 'CASCADE'
 });
   
 User.hasMany(Comment, {
@@ -56,7 +56,6 @@ User.hasMany(Comment, {
   
 Post.hasMany(Comment, {
     foreignKey: 'post_id',
-    onDelete: 'CASCADE'
 });
 
 module.exports = { User, Post, Comment, Favorite };
