@@ -7,9 +7,10 @@ const path = require('path');
 const sequelize = require('./config/connection');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+require('dotenv').config();
 
 const sess = {
-    secret: 'hey there demons its me ya boi',
+    secret: process.env.SECRET,
     cookie: {},
     resave: false,
     saveUninitialized: true,
