@@ -99,7 +99,6 @@ router.get('/:id', (req, res) => {
 
 
 router.post('/', (req, res, next) => {
-    // let latitude, longitude;
     const cityData = getMapquestData(req.body.city, req.body.country)
         .then(data => {
             [req.body.latitude, req.body.longitude] = data;
@@ -136,15 +135,21 @@ router.put('/favorite', (req, res) => {
     }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', (req, res, next) => {
+    const cityData = getMapquestData(req.body.city, req.body.country)
+    .then(data => {
+        [req.body.latitude, req.body.longitude] = data;
+        next();
+    });
+}, function(req, res){
     Post.update(
         {
             title: req.body.title,
             post_text: req.body.post_text,
             city: req.body.city,
             country: req.body.country,
-            lat: req.body.lat,
-            long: req.body.long,
+            lat: req.body.latitude,
+            long: req.body.longitude,
             user_id: req.session.user_id
 
         },

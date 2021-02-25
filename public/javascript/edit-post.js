@@ -10,20 +10,12 @@ async function editFormHandler(event) {
   ];
 
   if (title && post_text && city && country) {
-    let lat, long;
-    const cityData = await fetch(`https://www.mapquestapi.com/geocoding/v1/address?key=pjtMs45lJi90EGCVfaBEDChiCmQFtGmI&location=${city}+${country}`).then(data => {
-      return data.json();
-    }).then(data => {
-      [lat, long] = [data.results[0].locations[0].latLng.lat, data.results[0].locations[0].latLng.lng];
-    });
 
     const response = await fetch(`/api/posts/${id}`, {
       method: 'PUT',
       body: JSON.stringify({
         title,
         post_text,
-        long,
-        lat,
         city,
         country
       }),
