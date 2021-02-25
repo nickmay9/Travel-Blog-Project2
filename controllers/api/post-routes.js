@@ -1,5 +1,18 @@
 const router = require('express').Router();
 const { Post, User, Comment, Favorite } = require('../../models');
+const axios = require('axios');
+require('dotenv').config();
+
+const getMapquestData = async function(city, country){
+    try{
+        return await axios.get(`https://www.mapquestapi.com/geocoding/v1/address?key=${process.env.MapqquestApiKey}=${city}+${country}`)
+        .then(data => {
+            return [data.data.results[0].locations[0].latLng.lat, data.data.results[0].locations[0].latLng.lng]
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 router.get('/', (req, res) => {
     Post.findAll({
@@ -85,14 +98,22 @@ router.get('/:id', (req, res) => {
 
 
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
+    // let latitude, longitude;
+    const cityData = getMapquestData(req.body.city, req.body.country)
+        .then(data => {
+            [req.body.latitude, req.body.longitude] = data;
+            next();
+        });
+    
+}, function(req, res){
     Post.create({
         title: req.body.title,
         post_text: req.body.post_text,
         city: req.body.city,
         country: req.body.country,
-        long: req.body.long,
-        lat: req.body.lat,
+        long: req.body.longitude,
+        lat: req.body.latitude,
         user_id: req.session.user_id
     }).then(dbPostData => res.json(dbPostData))
       .catch(err => {
